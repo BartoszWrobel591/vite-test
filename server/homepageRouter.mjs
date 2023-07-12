@@ -12,7 +12,11 @@ router.get("/*", async (_req, res) => {
     manifest: await parseManifest(),
   };
 
-  res.render("index.html.ejs", data);
+  res.render("index.html.ejs", data, (err, html) => {
+    if (!err) {
+      res.send(html);
+    }
+  });
 });
 
 const parseManifest = async () => {
